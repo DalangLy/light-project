@@ -27,11 +27,7 @@
         <input id="exampleCheck1" type="checkbox" class="form-check-input" />
         <label class="form-check-label" for="exampleCheck1">Check me out</label>
       </div>
-      <button
-        type="submit"
-        class="btn btn-primary"
-        @click.prevent="signupClick"
-      >
+      <button type="submit" class="btn btn-primary" @click.prevent="loginClick">
         Login
       </button>
     </div>
@@ -48,30 +44,20 @@ export default {
       formPassword: '',
     }
   },
-  mounted() {
-    // this.checkLogin()
-
-    // eslint-disable-next-line
-    console.log(firebase.auth().currentUser)
-  },
   methods: {
-    checkLogin() {
-      firebase.auth().onAuthStateChanged(function (user) {
-        if (user) {
-        }
-      })
-    },
-    async signupClick() {
-      try {
-        await this.$store.dispatch('login', {
-          username: this.formUsername,
-          password: this.formPassword,
+    loginClick() {
+      firebase
+        .auth()
+        .signInWithEmailAndPassword(this.formUsername, this.formPassword)
+        .then((response) => {
+          // eslint-disable-next-line
+          console.log(response)
+          this.$router.push('/')
         })
-        this.formUsername = ''
-        this.formPassword = ''
-      } catch (e) {
-        // this.formError = e.message
-      }
+        .catch((error) => {
+          // eslint-disable-next-line
+          console.log(error)
+        })
     },
   },
 }

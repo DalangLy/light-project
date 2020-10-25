@@ -48,30 +48,22 @@ export default {
       formPassword: '',
     }
   },
-  mounted() {
-    // this.checkLogin()
-
-    // eslint-disable-next-line
-    console.log(firebase.auth().currentUser)
-  },
   methods: {
-    checkLogin() {
-      firebase.auth().onAuthStateChanged(function (user) {
-        if (user) {
-        }
-      })
-    },
-    async signupClick() {
-      try {
-        await this.$store.dispatch('signup', {
-          username: this.formUsername,
-          password: this.formPassword,
+    signupClick() {
+      firebase
+        .auth()
+        .createUserWithEmailAndPassword(this.formUsername, this.formPassword)
+        .then((response) => {
+          // eslint-disable-next-line
+          console.log(response)
+          this.$router.push('/')
         })
-        this.formUsername = ''
-        this.formPassword = ''
-      } catch (e) {
-        // this.formError = e.message
-      }
+        .catch((error) => {
+          // eslint-disable-next-line
+          console.log(error)
+        })
+      this.formUsername = ''
+      this.formPassword = ''
     },
   },
 }
