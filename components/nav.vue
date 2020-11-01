@@ -16,8 +16,8 @@
       <div id="navbarNav" class="collapse navbar-collapse">
         <ul class="navbar-nav mr-auto">
           <li class="nav-item active">
-            <a class="nav-link" href="#"
-              >Home <span class="sr-only">(current)</span></a
+            <nuxt-link to="/" class="nav-link"
+              >Home <span class="sr-only">(current)</span></nuxt-link
             >
           </li>
           <li v-if="$store.getters.isAuth" class="nav-item">

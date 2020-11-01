@@ -3,11 +3,11 @@
     <Nav />
 
     <div class="light-product-container">
-      <div
+      <nuxt-link
         v-for="item in items"
         :key="item.productName"
+        :to="item.id"
         class="light-card"
-        @click="show(item)"
       >
         <div class="light-image">
           <img
@@ -19,7 +19,7 @@
           <h6>{{ item.productName }}</h6>
           <p>{{ item.price }}$</p>
         </div>
-      </div>
+      </nuxt-link>
     </div>
   </div>
 </template>
@@ -81,26 +81,6 @@ export default {
         }
       )
     },
-    async show(item) {
-      // eslint-disable-next-line
-      console.log(item.id)
-      const doc = await firebase.firestore().collection('products').doc(item.id)
-
-      doc.onSnapshot(
-        (querySnapshot) => {
-          if (querySnapshot.empty) {
-            // eslint-disable-next-line
-            console.log('No matching documents.')
-          }
-          // eslint-disable-next-line
-          console.log(querySnapshot.data())
-        },
-        (err) => {
-          // eslint-disable-next-line
-          console.log(`Encountered error: ${err}`)
-        }
-      )
-    },
   },
 }
 </script>
@@ -123,6 +103,8 @@ export default {
     border-radius: 5px;
     transition: 0.3s ease;
     overflow: hidden;
+    text-decoration: none;
+    color: black;
     .light-image {
       width: 100%;
       height: 50%;
