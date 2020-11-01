@@ -43,36 +43,10 @@ export default {
       }
     })
 
-    this.ggg()
+    this.gettingData()
   },
   methods: {
     async gettingData() {
-      const doc = await firebase.firestore().collection('products')
-
-      doc.onSnapshot(
-        (docSnapshot) => {
-          if (docSnapshot.empty) {
-            // eslint-disable-next-line
-          console.log('No matching documents.')
-          }
-          docSnapshot.forEach((doc) => {
-            this.items.push({
-              id: doc.id,
-              productName: doc.data().productName,
-              price: doc.data().price,
-            })
-            // eslint-disable-next-line
-        //console.log(doc.id)
-            // this.items.push(doc.data())
-          })
-        },
-        (err) => {
-          // eslint-disable-next-line
-        console.log(`Encountered error: ${err}`)
-        }
-      )
-    },
-    async ggg() {
       const doc = await firebase.firestore().collection('products')
 
       doc.onSnapshot(
@@ -107,9 +81,25 @@ export default {
         }
       )
     },
-    show(item) {
+    async show(item) {
       // eslint-disable-next-line
-      console.log(item)
+      console.log(item.id)
+      const doc = await firebase.firestore().collection('products').doc(item.id)
+
+      doc.onSnapshot(
+        (querySnapshot) => {
+          if (querySnapshot.empty) {
+            // eslint-disable-next-line
+            console.log('No matching documents.')
+          }
+          // eslint-disable-next-line
+          console.log(querySnapshot.data())
+        },
+        (err) => {
+          // eslint-disable-next-line
+          console.log(`Encountered error: ${err}`)
+        }
+      )
     },
   },
 }
