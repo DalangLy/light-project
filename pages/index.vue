@@ -38,12 +38,11 @@ export default {
     firebase.auth().onAuthStateChanged((user) => {
       if (user) {
         this.$store.commit('SET_AUTH', true)
+        this.gettingData()
       } else {
         this.$store.commit('SET_AUTH', false)
       }
     })
-
-    this.gettingData()
   },
   methods: {
     async gettingData() {
@@ -71,7 +70,9 @@ export default {
             }
             if (change.type === 'removed') {
               // eslint-disable-next-line
-              console.log('Removed data: ', change.doc.data())
+              //console.log('Removed data: ', change.doc.data())
+              const index = this.items.findIndex((i) => i.id === change.doc.id)
+              this.$delete(this.items, index)
             }
           })
         },
