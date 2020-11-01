@@ -25,6 +25,14 @@
               >Logout</span
             >
           </li>
+          <li v-if="$store.getters.isAuth" class="nav-item">
+            <nuxt-link class="nav-link" to="/add_store">Add Store</nuxt-link>
+          </li>
+          <li v-if="$store.getters.isAuth" class="nav-item">
+            <nuxt-link class="nav-link" to="/add_product"
+              >Add Product</nuxt-link
+            >
+          </li>
           <li v-if="!$store.getters.isAuth" class="nav-item">
             <nuxt-link class="nav-link" to="/signup">Signup</nuxt-link>
           </li>
