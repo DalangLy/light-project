@@ -39,6 +39,11 @@
           <li v-if="!$store.getters.isAuth" class="nav-item">
             <nuxt-link class="nav-link" to="/login">Login</nuxt-link>
           </li>
+          <li v-if="$store.getters.isAuth" class="nav-item">
+            <nuxt-link class="nav-link" to="/product_list"
+              >Product List</nuxt-link
+            >
+          </li>
         </ul>
       </div>
     </nav>
