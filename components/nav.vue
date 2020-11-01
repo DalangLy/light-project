@@ -25,21 +25,11 @@
               >Logout</span
             >
           </li>
-          <li class="nav-item">
-            <nuxt-link
-              v-if="!$store.getters.isAuth"
-              class="nav-link"
-              to="/signup"
-              >Signup</nuxt-link
-            >
+          <li v-if="!$store.getters.isAuth" class="nav-item">
+            <nuxt-link class="nav-link" to="/signup">Signup</nuxt-link>
           </li>
-          <li class="nav-item">
-            <nuxt-link
-              v-if="!$store.getters.isAuth"
-              class="nav-link"
-              to="/login"
-              >Login</nuxt-link
-            >
+          <li v-if="!$store.getters.isAuth" class="nav-item">
+            <nuxt-link class="nav-link" to="/login">Login</nuxt-link>
           </li>
         </ul>
       </div>
@@ -48,14 +38,12 @@
 </template>
 
 <script>
+import * as firebase from 'firebase/app'
+import 'firebase/auth'
 export default {
   methods: {
-    async signout() {
-      try {
-        await this.$store.dispatch('signout')
-      } catch (e) {
-        // this.formError = e.message
-      }
+    signout() {
+      firebase.auth().signOut()
     },
   },
 }
