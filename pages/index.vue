@@ -69,10 +69,15 @@ export default {
             if (change.type === 'modified') {
               // eslint-disable-next-line
               console.log('Modified dat: ', change.doc.data())
+              const index = this.items.findIndex((i) => i.id === change.doc.id)
+              this.items[index].id = change.doc.id
+              this.items[index].productName = change.doc.data().productName
+              this.items[index].price = change.doc.data().price
+              this.items[index].reads = change.doc.data().reads
             }
             if (change.type === 'removed') {
               // eslint-disable-next-line
-              //console.log('Removed data: ', change.doc.data())
+              console.log('Removed data: ', change.doc.data())
               const index = this.items.findIndex((i) => i.id === change.doc.id)
               this.$delete(this.items, index)
             }

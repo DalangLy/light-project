@@ -27,6 +27,9 @@
             >
               Delete
             </button>
+            <nuxt-link :to="'products/' + item.id" class="btn btn-primary"
+              >Edit</nuxt-link
+            >
           </td>
         </tr>
       </tbody>
