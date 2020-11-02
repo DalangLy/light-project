@@ -18,6 +18,7 @@
         <div class="light-content">
           <h6>{{ item.productName }}</h6>
           <p>{{ item.price }}$</p>
+          <p>View {{ item.reads }}</p>
         </div>
       </nuxt-link>
     </div>
@@ -62,6 +63,7 @@ export default {
                 id: change.doc.id,
                 productName: change.doc.data().productName,
                 price: change.doc.data().price,
+                reads: change.doc.data().reads,
               })
             }
             if (change.type === 'modified') {

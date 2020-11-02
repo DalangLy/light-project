@@ -19,7 +19,7 @@
           <th scope="row">1</th>
           <td>{{ item.productName }}</td>
           <td>{{ item.price }}</td>
-          <td>{{ item.view }}</td>
+          <td>{{ item.reads }}</td>
           <td>
             <button
               class="btn btn-danger"
@@ -65,6 +65,7 @@ export default {
                 id: change.doc.id,
                 productName: change.doc.data().productName,
                 price: change.doc.data().price,
+                reads: change.doc.data().reads,
               })
             }
             if (change.type === 'modified') {

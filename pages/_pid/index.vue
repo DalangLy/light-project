@@ -39,6 +39,7 @@ export default {
           // eslint-disable-next-line
           console.log(querySnapshot.data())
           this.item = querySnapshot.data()
+          // this.updateView()
         },
         (err) => {
           // eslint-disable-next-line
@@ -47,13 +48,15 @@ export default {
       )
     },
     async updateView() {
-      await firebase
-        .firestore()
-        .collection('products')
-        .doc(this.$route.params.pid)
-        .update({
-          view: name,
-        })
+      const db = await firebase.firestore()
+      const increment = firebase.firestore.FieldValue.increment(1)
+
+      // Document reference
+      const storyRef = db.collection('products').doc(this.$route.params.pid)
+
+      // Update read count
+      storyRef
+        .update({ reads: increment })
         .then(() => {
           // eslint-disable-next-line
           console.log("Document successfully updated!");
