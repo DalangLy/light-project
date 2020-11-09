@@ -39,11 +39,12 @@ export default {
     firebase.auth().onAuthStateChanged((user) => {
       if (user) {
         this.$store.commit('SET_AUTH', true)
-        this.gettingData()
       } else {
         this.$store.commit('SET_AUTH', false)
       }
     })
+
+    this.gettingData()
   },
   methods: {
     async gettingData() {

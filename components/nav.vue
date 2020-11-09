@@ -1,7 +1,7 @@
 <template>
   <div>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
-      <a class="navbar-brand" href="#">Index</a>
+      <nuxt-link class="navbar-brand" to="/">Light</nuxt-link>
       <button
         class="navbar-toggler"
         type="button"
@@ -43,6 +43,9 @@
             <nuxt-link class="nav-link" to="/product_list"
               >Product List</nuxt-link
             >
+          </li>
+          <li v-if="$store.getters.isAuth" class="nav-item">
+            <nuxt-link class="nav-link" to="/light_map">Map</nuxt-link>
           </li>
         </ul>
       </div>
